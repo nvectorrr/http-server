@@ -5,10 +5,14 @@
 //  Created by Виктор  Найденович  on 05.03.2021.
 //
 
-#include <iostream>
+#include "logger.hpp"
+#include "worker.hpp"
+
+Logger *logger = 0;
+Worker *worker = 0;
 
 int main(int argc, const char * argv[]) {
-    // insert code here...
-    std::cout << "Hello, World!\n";
+    logger = new Logger("log.txt");
+    worker = new Worker(1234, 10, 4096);
     return 0;
 }
