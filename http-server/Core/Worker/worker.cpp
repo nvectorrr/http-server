@@ -87,12 +87,17 @@ void Worker::multiplexor( void ) {
                 sd = client_socket[j];
                         
                 if(FD_ISSET(master_socket, &readfds)) {
-                    if((valread = read(sd, buffer, 1024)) == 0) {
+                    if((valread = read(sd, buffer, io_buffer_size)) == 0) {
                         getpeername(sd, (struct sockaddr*)&address, (socklen_t*)&addrlen);
                         close(sd);
                         client_socket[j] = 0;
                     } else {
-                        debug_buffer_printer();
+                        //debug_buffer_printer();
+                        char *tmp = parser->get_parser_buffer();
+                        for(int i = 0; i < io_buffer_size; ++i)
+                            tmp[i] = buffer[i];
+                        tmp = 0;
+                        parser->parse_startline();
                     }
                 }
             }
@@ -101,7 +106,6 @@ void Worker::multiplexor( void ) {
 }
 
 void Worker::debug_buffer_printer( void ) {
-    //std::cout << sizeof(buffer) << std::endl;
     for(int u = 0; u < io_buffer_size; ++u)
             std::cout << buffer[u];
 }

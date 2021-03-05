@@ -15,8 +15,9 @@
 class Configuration {
 public:
     std::map<std::string, std::string> params;
-    
     std::map<std::string, std::string> params_to_map();
+    
+    enum Configuration_params { PORT, MAXIMUM_CONNECTIONS, IO_BUFFER_SIZE };
     
     Configuration(std::string config_path) {
         this->config_path = config_path;

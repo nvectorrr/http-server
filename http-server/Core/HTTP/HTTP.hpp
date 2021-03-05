@@ -11,7 +11,10 @@
 #include <stdio.h>
 
 class HTTP {
+public:
+    enum HTTP_Methods { GET, POST };
+    
     
 };
 
-#endif /* HTTP_hpp */
+#endif

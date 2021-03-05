@@ -12,6 +12,7 @@
 		77BD9F0925F23CB0000FCA41 /* configurator.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 77BD9F0725F23CB0000FCA41 /* configurator.cpp */; };
 		77BD9F0F25F23F27000FCA41 /* worker.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 77BD9F0D25F23F27000FCA41 /* worker.cpp */; };
 		77DC820625F2577800B77E16 /* HTTP.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 77DC820425F2577800B77E16 /* HTTP.cpp */; };
+		77DC820D25F25AEC00B77E16 /* parser.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 77DC820B25F25AEC00B77E16 /* parser.cpp */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXCopyFilesBuildPhase section */
@@ -38,6 +39,8 @@
 		77DC820425F2577800B77E16 /* HTTP.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = HTTP.cpp; sourceTree = "<group>"; };
 		77DC820525F2577800B77E16 /* HTTP.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = HTTP.hpp; sourceTree = "<group>"; };
 		77DC820925F2581C00B77E16 /* README.md */ = {isa = PBXFileReference; lastKnownFileType = net.daringfireball.markdown; path = README.md; sourceTree = "<group>"; };
+		77DC820B25F25AEC00B77E16 /* parser.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = parser.cpp; sourceTree = "<group>"; };
+		77DC820C25F25AEC00B77E16 /* parser.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = parser.hpp; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -126,10 +129,20 @@
 		77DC820325F2575500B77E16 /* HTTP */ = {
 			isa = PBXGroup;
 			children = (
+				77DC820A25F25AB200B77E16 /* Parser */,
 				77DC820425F2577800B77E16 /* HTTP.cpp */,
 				77DC820525F2577800B77E16 /* HTTP.hpp */,
 			);
 			path = HTTP;
+			sourceTree = "<group>";
+		};
+		77DC820A25F25AB200B77E16 /* Parser */ = {
+			isa = PBXGroup;
+			children = (
+				77DC820B25F25AEC00B77E16 /* parser.cpp */,
+				77DC820C25F25AEC00B77E16 /* parser.hpp */,
+			);
+			path = Parser;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -192,6 +205,7 @@
 				77BD9F0F25F23F27000FCA41 /* worker.cpp in Sources */,
 				77BD9F0225F23B28000FCA41 /* logger.cpp in Sources */,
 				77BD9F0925F23CB0000FCA41 /* configurator.cpp in Sources */,
+				77DC820D25F25AEC00B77E16 /* parser.cpp in Sources */,
 				77DC820625F2577800B77E16 /* HTTP.cpp in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

@@ -16,6 +16,7 @@
 #include <unistd.h>
 
 #include "logger.hpp"
+#include "parser.hpp"
 
 extern Logger *logger;
 
@@ -32,6 +33,7 @@ public:
         this->maximum_connections = maximum_connections;
         this->io_buffer_size = io_buffer_size;
         
+        this->parser = new Parser(this->io_buffer_size);
         this->buffer = new char[this->io_buffer_size];
         this->conn_info = new struct connection_info[this->maximum_connections];
         this->client_socket = new int[this->maximum_connections];
@@ -43,12 +45,13 @@ public:
 private:
     int master_socket, addrlen, max_sd, sd;
     int activity;
-    ssize_t valread;
     int port, maximum_connections, io_buffer_size, *client_socket;
     char *buffer;
+    ssize_t valread;
+    fd_set readfds, writefds, errorfds;
     struct connection_info *conn_info;
     struct sockaddr_in address;
-    fd_set readfds, writefds, errorfds;
+    Parser *parser = 0;
     
     void init_server( void );
     void multiplexor( void );
