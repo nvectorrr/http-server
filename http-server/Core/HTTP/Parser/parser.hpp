@@ -8,14 +8,18 @@
 #ifndef parser_hpp
 #define parser_hpp
 
-#include <string>
 #include <iostream>
+#include <string>
+#include <map>
+#include <vector>
 
 class Parser {
 public:
     void parse_startline( void );
+    void parse_headers( int start_i );
     void debug_buffer_printer( void );
     void clean_buffer( void );
+    void print_map( std::map<std::string, std::string> map );
     
     Parser(int io_buffer_size) {
         this->io_buffer_size = io_buffer_size;
@@ -30,6 +34,8 @@ public:
 private:
     char *_buffer;
     int io_buffer_size;
+    std::string method = "", filepath = "", http_version = "";
+    std::map<std::string, std::string> headers;
 };
 
 #endif

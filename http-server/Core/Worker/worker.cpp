@@ -67,8 +67,6 @@ void Worker::multiplexor( void ) {
                 exit(EXIT_FAILURE);
             }
             
-            std::cout << "accept attempt passed" << std::endl;
-            
             for(int i = 0; i < maximum_connections; i++) {
                 if(client_socket[i] == 0) {
                     client_socket[i] = new_socket;
@@ -92,7 +90,8 @@ void Worker::multiplexor( void ) {
                         close(sd);
                         client_socket[j] = 0;
                     } else {
-                        //debug_buffer_printer();
+                        //MARK: debug buffer printer
+                        debug_buffer_printer();
                         char *tmp = parser->get_parser_buffer();
                         for(int i = 0; i < io_buffer_size; ++i)
                             tmp[i] = buffer[i];
