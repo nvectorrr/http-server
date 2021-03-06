@@ -101,6 +101,7 @@ void Parser::parse_headers( int start_i ) {
         if(!(param == "" && value == ""))
             headers.insert(std::pair<std::string, std::string>(param, value));
     }
+    print_map(headers);
 }
 
 void Parser::print_map( std::map<std::string, std::string> map ) {

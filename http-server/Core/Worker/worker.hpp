@@ -14,9 +14,10 @@
 #include <netinet/in.h>
 #include <sys/select.h>
 #include <unistd.h>
+#include <vector>
+#include <thread>
 
 #include "logger.hpp"
-#include "parser.hpp"
 
 extern Logger *logger;
 
@@ -33,7 +34,6 @@ public:
         this->maximum_connections = maximum_connections;
         this->io_buffer_size = io_buffer_size;
         
-        this->parser = new Parser(this->io_buffer_size);
         this->buffer = new char[this->io_buffer_size];
         this->conn_info = new struct connection_info[this->maximum_connections];
         this->client_socket = new int[this->maximum_connections];
@@ -51,7 +51,7 @@ private:
     fd_set readfds, writefds, errorfds;
     struct connection_info *conn_info;
     struct sockaddr_in address;
-    Parser *parser = 0;
+    std::vector<std::thread> thread_list;
     
     void init_server( void );
     void multiplexor( void );

@@ -6,6 +6,20 @@
 //
 
 #include "worker.hpp"
+#include "parser.hpp"
+
+void new_thread_task( int buff_size, char* worker_buff ) {
+    Parser *parser = new Parser(buff_size);
+    char *tmp = parser->get_parser_buffer();
+    
+    for(int i = 0; i < buff_size; ++i) {
+        tmp[i] = worker_buff[i];
+    }
+    tmp = 0; worker_buff = 0;
+    
+    parser->parse_startline();
+}
+
 
 void Worker::init_server( void ) {
     int opt = 1;
@@ -89,14 +103,14 @@ void Worker::multiplexor( void ) {
                         getpeername(sd, (struct sockaddr*)&address, (socklen_t*)&addrlen);
                         close(sd);
                         client_socket[j] = 0;
+                        thread_list.at(j).detach();
+                        thread_list.erase(thread_list.begin() + j);
                     } else {
                         //MARK: debug buffer printer
                         debug_buffer_printer();
-                        char *tmp = parser->get_parser_buffer();
-                        for(int i = 0; i < io_buffer_size; ++i)
-                            tmp[i] = buffer[i];
-                        tmp = 0;
-                        parser->parse_startline();
+                        
+                        thread_list.push_back(std::thread(new_thread_task, io_buffer_size, buffer));
+                        thread_list.at(j).join();
                     }
                 }
             }
